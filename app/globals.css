@@ -139,8 +139,8 @@ button:disabled {
     position: relative;
     display: flex;
     flex-direction: column;
-    /* margin-left: 200px;
-    width: calc(100% - 200px); */
+    margin-left: 200px;
+    width: calc(100% - 200px);
     transition: all .3s;
 }
 
@@ -149,10 +149,10 @@ button:disabled {
     width: 100%;
 }
 
-.sidebar__overlay--hidden {
+/* .sidebar__overlay--hidden {
     opacity: 0;
     pointer-events: none;
-}
+} */
 
 .sidebar__overlay {
     position: fixed;
@@ -160,10 +160,10 @@ button:disabled {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: #3a4649;
-    transition: opacity .4s ease 0s;
+    background-color: rgba(58, 70, 73, 0.65);
+    /* transition: opacity .4s ease 0s; */
     z-index: 10;
-    opacity: .65;
+    /* opacity: .65; */
     pointer-events: auto;
 }
 
@@ -177,6 +177,7 @@ button:disabled {
     top: 0;
     left: 0;
     height: 100%;
+    width: 100%;
     background-color: rgba(0, 0, 0, .75);
     display: flex;
     justify-content: center;
@@ -190,14 +191,16 @@ button:disabled {
     background-color: #fff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+    min-height: 500px;
+    overflow: hidden;
 }
 
 .auth__close--btn {
     position: absolute;
-    top: 12px;
-    height: 24px;
-    width: 24px;
-    right: 12px;
+    top: 10px;
+    height: 50px;
+    width: 50px;
+    right: 10px;
     display: flex;
     cursor: pointer;
     transition: opacity .2s;
@@ -237,15 +240,6 @@ button:disabled {
     min-width: 180px;
 }
 
-figure {
-    display: block;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 40px;
-    margin-inline: 40px; 
-    unicode-bidi: isolate;
-}
-
 button {
     cursor: pointer;
     outline: none;
@@ -257,6 +251,7 @@ button {
     background-color: transparent;
     width: 24px;
     height: 24px;
+    border-radius: 4px;
 }
 
 .google__icon--mask {
@@ -271,18 +266,26 @@ button {
     left: 2px;
 }
 
-.auth__separator:before {
+.auth__separator::before {
     content: "";
     display: block;
     height: 1px;
     background: #bac8ce;
 }
 
-.auth__separator:after {
+.auth__separator::after {
     content: "";
     display: block;
     height: 1px;
     background: #bac8ce;
+}
+
+.auth__separator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 8px;
+  padding-bottom: 8px;
 }
 
 .auth__separator--text {

@@ -2,8 +2,8 @@
 import guest from "../../assets/guest-icon.png"
 import close from "../../assets/close.png"
 import google from "../../assets/google.png"
-import React from 'react'
-import { auth } from "../../firebase"
+import { useEffect, useState, createContext, useContext } from 'react'
+import { auth } from "../firebase"
 import { 
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword,
@@ -14,61 +14,20 @@ import {
 
 export default function Modal() {
 
-    const [user, setUser] = React.useState({})
-    const [loading, setLoading] = React.useState(true)
-
-     React.useEffect(() => {
-     onAuthStateChanged(auth, (user) =>{
-      setTimeout(() => {
-        setLoading(false)
-        console.log(user);
-        if (user) {
-          setUser(user)
-        }
-      }, 1000)
-     })
-    }, [])
-
-    function register() {
-        // console.log('register')
-        createUserWithEmailAndPassword(auth, 'test3@email.com', 'test1234')
-        .then((user) => {
-            console.log(user)
-        })
-        .catch((error) => {
-            console.log(error)
-        })
-    }
-
-    function login() {
-        signInWithEmailAndPassword(auth, 'test3@email.com', 'test1234')
-        .then(({ user }) => {
-        console.log(user)
-        setUser(user)
-        })
-        .catch((error) => {
-        console.log(error.message)
-    })
-    }
-
-    function logout() {
-        signOut(auth);
-        setUser({})
-    }
 
   return (
     <body>
         <div id="__next">
             <div className="wrapper wrapper__full">
-                <div className='sidebar__overlay sidebar__overlay--hidden'>
-                    <div className="auth__Wrapper">
+                <div className='sidebar__overlay'>
+                    <div className="auth__wrapper">
                         <div className="auth">
                             <div className='auth__content'>
                                 <div className='auth__title'>
                                     Log in to Summarist
                                 </div>
                                 <button 
-                                onClick={login}
+                                // onClick={login}
                                 className='btn guest__btn--wrapper'>
                                     <figure className='google__icon--mask guest__icon--mask'>
                                         <img src={guest.src} alt="" />
@@ -79,7 +38,7 @@ export default function Modal() {
                                     <span className="auth__separator--text">or</span>
                                 </div>
                                 <button 
-                                onClick={register}
+                                // onClick={register}
                                 className="btn google__btn--wrapper">
                                     <figure className="google__icon--mask">
                                         <img src={google.src} alt="" />
@@ -89,11 +48,11 @@ export default function Modal() {
                                 <div className="auth__separator">
                                     <span className="auth__separator--text">or</span>
                                 </div>
-                                <form className="auth__main--input">
+                                <form className="auth__main--form">
                                     <input className="auth__main--input" type="text" placeholder="Email Address"/>
                                     <input className="auth__main--input" type="password" placeholder="Password"/>
                                     <button 
-                                    onClick={login}
+                                    // onClick={login}
                                     className="btn">
                                         <span>Login</span>
                                     </button>
@@ -110,3 +69,5 @@ export default function Modal() {
     </body>
   )
 }
+
+
