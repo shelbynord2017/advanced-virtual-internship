@@ -4,9 +4,12 @@ import {
   createUserWithEmailAndPassword, 
   signInWithEmailAndPassword, 
   signOut, 
+  signInAnonymously,
   onAuthStateChanged 
 } from 'firebase/auth';
 import { auth } from '../firebase';
+
+const AuthContext = createContext(null);
 
 // Define context, manage user state, and provide auth methods
 export const AuthContextProvider = ({ children }) => {
@@ -24,10 +27,11 @@ export const AuthContextProvider = ({ children }) => {
 
   const register = (e, p) => createUserWithEmailAndPassword(auth, e, p);
   const login = (e, p) => signInWithEmailAndPassword(auth, e, p);
+  const guestLogin = () => signInAnonymously(auth);
   const logout = () => signOut(auth);
 
   return (
-    <AuthContext.Provider value={{ user, login, register, logout }}>
+    <AuthContext.Provider value={{ user, login, register, logout, loading }}>
       {loading ? <div>Loading...</div> : children}
     </AuthContext.Provider>
   );

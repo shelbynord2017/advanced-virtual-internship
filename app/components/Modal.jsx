@@ -2,17 +2,49 @@
 import guest from "../../assets/guest-icon.png"
 import close from "../../assets/close.png"
 import google from "../../assets/google.png"
-import { useEffect, useState, createContext, useContext } from 'react'
-import { auth } from "../firebase"
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
- } from 'firebase/auth';
+import { useState } from 'react'
+import { useAuth } from "./AuthContextProvider"
 
 
-export default function Modal() {
+export default function Modal({ isOpen, onClose }) {
+
+    const { register, login, guestLogin } = useAuth();
+    const [isLogin, setIsLogin] = useState(true);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  if (!isOpen) return null;
+
+  const Modal = {
+    isOpen: true,
+    onClose: () => console.log('Closed')
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setError('');
+    try {
+      if (isLogin) {
+        await login(email, password);
+      } else {
+        await register(email, password);
+      }
+      onClose();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleGuest = async () => {
+    try {
+      await guestLogin();
+      onClose();
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
 
 
   return (
@@ -27,14 +59,14 @@ export default function Modal() {
                                     Log in to Summarist
                                 </div>
                                 <button 
-                                // onClick={login}
+                                onClick={handleGuest}
                                 className='btn guest__btn--wrapper'>
                                     <figure className='google__icon--mask guest__icon--mask'>
                                         <img src={guest.src} alt="" />
                                     </figure>
                                     <div>Login as a Guest</div>
                                 </button>
-                                <div className="auth__separator">
+                                {/* <div className="auth__separator">
                                     <span className="auth__separator--text">or</span>
                                 </div>
                                 <button 
@@ -44,20 +76,33 @@ export default function Modal() {
                                         <img src={google.src} alt="" />
                                     </figure>
                                     <div>Register</div>
-                                </button>
+                                </button> */}
                                 <div className="auth__separator">
                                     <span className="auth__separator--text">or</span>
                                 </div>
                                 <form className="auth__main--form">
-                                    <input className="auth__main--input" type="text" placeholder="Email Address"/>
-                                    <input className="auth__main--input" type="password" placeholder="Password"/>
+                                    <input 
+                                        className="auth__main--input" 
+                                        type="text" 
+                                        placeholder="Email Address"
+                                        onChange={(e) => setEmail(e.target.value)}/>
+                                    <input 
+                                        className="auth__main--input" 
+                                        type="password" 
+                                        placeholder="Password"
+                                        onChange={(e) => setPassword(e.target.value)}/>
                                     <button 
-                                    // onClick={login}
                                     className="btn">
-                                        <span>Login</span>
+                                        <span>{isLogin ? 'Sign In' : 'Register'}</span>
                                     </button>
                                 </form>
-                                <div className="auth__close--btn">
+                                <p className="toggle__text">
+                                    {isLogin ? "Need an account? " : "Already have an account? "}
+                                    <button onClick={() => setIsLogin(!isLogin)} className="auth__switch--btn">{isLogin ? 'Register' : 'Sign In'}</button>
+                                </p>
+                                <div 
+                                onClick={onClose}
+                                className="auth__close--btn">
                                     <img src={close.src} alt="" />
                                 </div>
                             </div>
