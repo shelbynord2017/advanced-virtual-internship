@@ -1,5 +1,8 @@
 import React from 'react'
 import pricing from '../../assets/pricing-top.png'
+import { IoDocumentText } from "react-icons/io5";
+import { RiPlantFill } from "react-icons/ri";
+import { FaHandshake } from "react-icons/fa";
 
 export default function choosePlan() {
 
@@ -82,7 +85,7 @@ export default function choosePlan() {
                     <div className="plan__features--wrapper">
                         <div className="plan__features">
                             <figure className='plan__features--icon'>
-
+                                <IoDocumentText className='plan__features--icon-img'/>
                             </figure>
                             <div className="plan__features--text">
                                 <b>Key ideas in a few min</b>
@@ -91,7 +94,7 @@ export default function choosePlan() {
                         </div>
                         <div className="plan__features">
                             <figure className='plan__features--icon'>
-
+                                <RiPlantFill className='plan__features--icon-img'/>
                             </figure>
                             <div className="plan__features--text">
                                 <b>3 million</b>
@@ -100,7 +103,7 @@ export default function choosePlan() {
                         </div>
                         <div className="plan__features">
                             <figure className='plan__features--icon'>
-
+                                <FaHandshake className='plan__features--icon-img'/>
                             </figure>
                             <div className="plan__features--text">
                                 <b>Precise recommendations</b>

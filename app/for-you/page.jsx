@@ -1,12 +1,8 @@
 "use client"
-import search from "../../assets/search-icon.png"
-import logo from "../../assets/logo.png"
-import home from "../../assets/home-icon4.png"
-import bookmark from "../../assets/bookmark-icon2.png"
-import pen from "../../assets/pen-icon.png"
-import settings from "../../assets/settings-icon.png"
-import question from "../../assets/question-icon.png"
-import logout from "../../assets/logout-icon.png"
+import logo from '../../assets/logo.png'
+import { FaHome, FaRegBookmark, FaPenAlt, FaSearch,  } from "react-icons/fa";
+import { IoSettingsOutline, IoLogOutOutline } from "react-icons/io5";
+import { IoMdHelpCircle } from "react-icons/io";
 import { useAuth } from "../components/AuthContextProvider"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -25,7 +21,7 @@ export default function forYou() {
         console.log("after logout")
         router.push("/");
         } catch (err) {
-        setError(err.message);
+        setError("invalid email or password");
         }
     };
   
@@ -43,7 +39,7 @@ export default function forYou() {
                                     type="text" 
                                 />
                                 <div className="search__icon">
-                                    <img className="search__icon--img" src={search.src} alt="" />
+                                    <FaSearch  className="sidebar__icon--img" />
                                 </div>
                             </div>
                         </div>
@@ -59,25 +55,25 @@ export default function forYou() {
                     <div className="sidebar__top">
                         <a className="sidebar__link--wrapper">
                             <div className="sidebar__icon--wrapper">
-                                <img className="sidebar__icon--img" src={home.src} alt="" />
+                                <FaHome className="sidebar__icon--img" />
                             </div>
                             <div className="sidebar__link--text">For you</div>
                         </a>
                         <a className="sidebar__link--wrapper">
                             <div className="sidebar__icon--wrapper">
-                                <img className="sidebar__icon--img" src={bookmark.src} alt="" />
+                                <FaRegBookmark className="sidebar__icon--img" />
                             </div>
                             <div className="sidebar__link--text">My library</div>
                         </a>
                         <div className="sidebar__link--wrapper sidebar__link--not-allowed">
                             <div className="sidebar__icon--wrapper">
-                                <img className="sidebar__icon--img" src={pen.src} alt="" />
+                                <FaPenAlt className="sidebar__icon--img" />
                             </div>
                             <div className="sidebar__link--text">Highlights</div>
                         </div>
                         <div className="sidebar__link--wrapper sidebar__link--not-allowed">
                             <div className="sidebar__icon--wrapper">
-                                <img className="sidebar__icon--img" src={search.src} alt="" />
+                                <FaSearch  className="sidebar__icon--img" />
                             </div>
                             <div className="sidebar__link--text">Search</div>
                         </div>
@@ -85,13 +81,13 @@ export default function forYou() {
                     <div className="sidebar__bottom">
                         <div className="sidebar__link--wrapper sidebar__link--not-allowed">
                             <div className="sidebar__icon--wrapper">
-                                <img className="sidebar__icon--img" src={settings.src} alt="" />
+                                <IoSettingsOutline className="sidebar__icon--img" />
                             </div>
                             <div className="sidebar__link--text">Settings</div>
                         </div>
                         <div className="sidebar__link--wrapper sidebar__link--not-allowed">
                             <div className="sidebar__icon--wrapper">
-                                <img className="sidebar__icon--img" src={question.src} alt="" />
+                                <IoMdHelpCircle className="sidebar__icon--img" />
                             </div>
                             <div className="sidebar__link--text">Help & Support</div>
                         </div>
@@ -99,7 +95,7 @@ export default function forYou() {
                         onClick={handleLogout}
                         className="sidebar__link--wrapper">
                             <div className="sidebar__icon--wrapper">
-                                <img className="sidebar__icon--img" src={logout.src} alt="" />
+                                <IoLogOutOutline className="sidebar__icon--img" />
                             </div>
                             <div 
                             
