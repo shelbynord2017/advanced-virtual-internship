@@ -1,10 +1,8 @@
 "use client"
-import { useState } from "react";
 import logo from "../../assets/logo.png"
-import Modal from "./Modal";
 
-export default function Navbar() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+export default function Navbar({ onLoginClick }) {
+  
 
   return (
     <nav className="nav">
@@ -13,8 +11,9 @@ export default function Navbar() {
           <img className="nav__img" src={logo.src} alt="logo" />
         </figure>
         <ul className="nav__list--wrapper">
-          <li className="nav__list nav__list--login"
-          onClick={() => setIsModalOpen(true)}>
+          <li 
+            className="nav__list nav__list--login"
+            onClick={onLoginClick}>
             Login
           </li>
           <li className="nav__list nav__list--mobile">About</li>
@@ -22,7 +21,7 @@ export default function Navbar() {
           <li className="nav__list nav__list--mobile">Help</li>
         </ul>
       </div>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+      {/* <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} /> */}
     </nav>
   );
 }
