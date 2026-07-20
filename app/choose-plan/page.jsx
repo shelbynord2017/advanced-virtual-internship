@@ -1,10 +1,19 @@
-import React from 'react'
+"use client"
+import React, { useState } from 'react'
 import pricing from '../../assets/pricing-top.png'
 import { IoDocumentText } from "react-icons/io5";
 import { RiPlantFill } from "react-icons/ri";
 import { FaHandshake } from "react-icons/fa";
+import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function choosePlan() {
+
+    const [activeIndex, setActiveIndex] = useState(-1);
+
+    const handleToggle = (index) => {
+    // If clicked item is already open, close it; otherwise, open it
+    setActiveIndex(activeIndex === index ? -1 : index);
+  };
 
   return (    
     <div className="wrapper__full">
@@ -149,7 +158,9 @@ export default function choosePlan() {
                                 <div className="accordion__title">
                                     How does the 7-day free trial work?
                                 </div>
-                                <figure></figure>
+                                <button onClick={() => handleToggle(index)}>
+                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
+                                </button>
                             </div>
                             <div className="collapse__show">
                                 <div className="accordion__body">
@@ -166,7 +177,9 @@ export default function choosePlan() {
                                 <div className="accordion__title">
                                     Can I switch subscriptions from monthly to yearly, or yearly to monthly?
                                 </div>
-                                <figure></figure>
+                                <figure>
+                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
+                                </figure>
                             </div>
                             <div className="collapse__show">
                                 <div className="accordion__body">
@@ -180,7 +193,9 @@ export default function choosePlan() {
                                 <div className="accordion__title">
                                     What's included in the Premium plan?
                                 </div>
-                                <figure></figure>
+                                <figure>
+                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
+                                </figure>
                             </div>
                             <div className="collapse__show">
                                 <div className="accordion__body">
@@ -196,7 +211,9 @@ export default function choosePlan() {
                                 <div className="accordion__title">
                                     Can I cancel during my trial or subscription?
                                 </div>
-                                <figure></figure>
+                                <figure>
+                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
+                                </figure>
                             </div>
                             <div className="collapse__show">
                                 <div className="accordion__body">
