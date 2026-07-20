@@ -8,12 +8,17 @@ import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function choosePlan() {
 
-    const [activeIndex, setActiveIndex] = useState(-1);
+    // const [activeIndex, setActiveIndex] = useState(-1);
+    const [planChoice, setPlanChoice] = useState(true);
 
-    const handleToggle = (index) => {
-    // If clicked item is already open, close it; otherwise, open it
-    setActiveIndex(activeIndex === index ? -1 : index);
-  };
+    const handlePlanChoice = (event) => {
+        setPlanChoice(event.target.value);
+    };
+
+//     const handleToggle = (index) => {
+//     // If clicked item is already open, close it; otherwise, open it
+//     setActiveIndex(activeIndex === index ? -1 : index);
+//   };
 
   return (    
     <div className="wrapper__full">
@@ -121,27 +126,36 @@ export default function choosePlan() {
                         </div>
                     </div>
                     <div className="section__title">Choose the plan that fits you</div>
-                    <div className="plan__card plan__card--active">
-                        <div className="plan__card--circle">
-                            <div className="plan__card--dot"></div>
-                        </div>
+                    <button 
+                    className={`plan__card ${planChoice === 'yearly' ? 'active' : ''}`}>
+                        <input 
+                        type="radio"
+                        name='subscription'
+                        value='yearly'
+                        checked={planChoice === 'yearly'}
+                        onChange={handlePlanChoice} />
                         <div className="plan__card--content">
                             <div className="plan__card--title">Premium Plus Yearly</div>
                             <div className="plan__card--price">$99.99/year</div>
                             <div className="plan__card--text">7-day free trial included</div>
                         </div>
-                    </div>
+                    </button>
                     <div className="plan__card--separator">
                         <div className="plan__separator">or</div>
                     </div>
-                    <div className="plan__card ">
-                        <div className="plan__card--circle"></div>
+                    <button className={`plan__card ${planChoice === 'monthly' ? 'active' : ''}`}>
+                        <input 
+                        type="radio"
+                        name='subscription'
+                        value='monthly'
+                        checked={planChoice === 'monthly'}
+                        onChange={handlePlanChoice} />
                         <div className="plan__card--content">
                             <div className="plan__card--title">Premium Monthly</div>
-                            <div className="plan__card--price">$9.99/year</div>
+                            <div className="plan__card--price">$9.99/month</div>
                             <div className="plan__card--text">No trial included</div>
                         </div>
-                    </div>
+                    </button>
                     <div className="plan__card--cta">
                         <span className='btn--wrapper'>
                             <button className='btn'>
