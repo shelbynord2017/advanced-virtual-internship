@@ -8,17 +8,17 @@ import { IoIosArrowDropdown } from "react-icons/io";
 
 export default function choosePlan() {
 
-    // const [activeIndex, setActiveIndex] = useState(-1);
+    const [openIndex, setOpenIndex] = useState(null);
     const [planChoice, setPlanChoice] = useState(true);
 
     const handlePlanChoice = (event) => {
         setPlanChoice(event.target.value);
     };
 
-//     const handleToggle = (index) => {
-//     // If clicked item is already open, close it; otherwise, open it
-//     setActiveIndex(activeIndex === index ? -1 : index);
-//   };
+    const handleAccordion = (index) => {
+    // If clicked item is already open, close it; otherwise, open it
+    setOpenIndex(openIndex === index ? null : index);
+  };
 
   return (    
     <div className="wrapper__full">
@@ -172,8 +172,8 @@ export default function choosePlan() {
                                 <div className="accordion__title">
                                     How does the 7-day free trial work?
                                 </div>
-                                <button onClick={() => handleToggle(index)}>
-                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
+                                <button onClick={() => handleAccordion(index)}>
+                                    <IoIosArrowDropdown className={`accordion__icon ${openIndex ? 'rotated' : ''}`}/>
                                 </button>
                             </div>
                             <div className="collapse__show">
@@ -191,9 +191,9 @@ export default function choosePlan() {
                                 <div className="accordion__title">
                                     Can I switch subscriptions from monthly to yearly, or yearly to monthly?
                                 </div>
-                                <figure>
-                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
-                                </figure>
+                                <button onClick={() => handleAccordion(index)}>
+                                    <IoIosArrowDropdown className={`accordion__icon ${openIndex ? 'rotated' : ''}`}/>
+                                </button>
                             </div>
                             <div className="collapse__show">
                                 <div className="accordion__body">
