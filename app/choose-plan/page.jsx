@@ -5,6 +5,7 @@ import { IoDocumentText } from "react-icons/io5";
 import { RiPlantFill } from "react-icons/ri";
 import { FaHandshake } from "react-icons/fa";
 import { IoIosArrowDropdown } from "react-icons/io";
+import AccordionItem from '../components/AccordionItem'
 
 export default function choosePlan() {
 
@@ -15,10 +16,10 @@ export default function choosePlan() {
         setPlanChoice(event.target.value);
     };
 
-    const handleAccordion = (index) => {
-    // If clicked item is already open, close it; otherwise, open it
-    setOpenIndex(openIndex === index ? null : index);
-  };
+//     const handleAccordion = (index) => {
+//     // If clicked item is already open, close it; otherwise, open it
+//     setOpenIndex(openIndex === index ? null : index);
+//   };
 
   return (    
     <div className="wrapper__full">
@@ -158,7 +159,9 @@ export default function choosePlan() {
                     </button>
                     <div className="plan__card--cta">
                         <span className='btn--wrapper'>
-                            <button className='btn'>
+                            <button 
+                            onClick={() => startCheckoutSession(selectedProductId)}
+                            className='btn'>
                                 <span>Start your free 7-day trial</span>
                             </button>
                         </span>
@@ -172,10 +175,11 @@ export default function choosePlan() {
                                 <div className="accordion__title">
                                     How does the 7-day free trial work?
                                 </div>
-                                <button onClick={() => handleAccordion(index)}>
+                                <button>
                                     <IoIosArrowDropdown className={`accordion__icon ${openIndex ? 'rotated' : ''}`}/>
                                 </button>
                             </div>
+                            <AccordionItem>
                             <div className="collapse__show">
                                 <div className="accordion__body">
                                     Begin your complimentary 7-day trial with a Summarist annual membership. 
@@ -185,22 +189,25 @@ export default function choosePlan() {
                                     and you may terminate your subscription prior to the conclusion of the 7-day free trial.
                                 </div>
                             </div>
+                            </AccordionItem>
                         </div>
                         <div className="accordion__card">
                             <div className="accordion__header">
                                 <div className="accordion__title">
                                     Can I switch subscriptions from monthly to yearly, or yearly to monthly?
                                 </div>
-                                <button onClick={() => handleAccordion(index)}>
+                                <button>
                                     <IoIosArrowDropdown className={`accordion__icon ${openIndex ? 'rotated' : ''}`}/>
                                 </button>
                             </div>
+                            <AccordionItem>
                             <div className="collapse__show">
                                 <div className="accordion__body">
                                     While an annual plan is active, it is not feasible to switch to a monthly plan. 
                                     However, once the current month ends, transitioning from a monthly plan to an annual plan is an option.
                                 </div>
                             </div>
+                            </AccordionItem>
                         </div>
                         <div className="accordion__card">
                             <div className="accordion__header">
@@ -211,6 +218,7 @@ export default function choosePlan() {
                                     <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
                                 </figure>
                             </div>
+                            <AccordionItem>
                             <div className="collapse__show">
                                 <div className="accordion__body">
                                     Premium membership provides you with the ultimate Summarist 
@@ -219,6 +227,7 @@ export default function choosePlan() {
                                     and the option to send your reads to your Kindle.
                                 </div>
                             </div>
+                            </AccordionItem>
                         </div>
                         <div className="accordion__card">
                             <div className="accordion__header">
@@ -229,6 +238,7 @@ export default function choosePlan() {
                                     <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
                                 </figure>
                             </div>
+                            <AccordionItem>
                             <div className="collapse__show">
                                 <div className="accordion__body">
                                     You will not be charged if you cancel your trial 
@@ -237,6 +247,7 @@ export default function choosePlan() {
                                     your knowledge with one curated book per day.
                                 </div>
                             </div>
+                            </AccordionItem>
                         </div>
                     </div>
                 </div>
