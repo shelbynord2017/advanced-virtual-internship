@@ -5,21 +5,29 @@ import { IoDocumentText } from "react-icons/io5";
 import { RiPlantFill } from "react-icons/ri";
 import { FaHandshake } from "react-icons/fa";
 import { IoIosArrowDropdown } from "react-icons/io";
-import AccordionItem from '../components/AccordionItem'
+import AccordionItem from '../components/AccordionItem';
+import Checkout from '../components/Checkout'
 
-export default function choosePlan() {
 
-    const [openIndex, setOpenIndex] = useState(null);
-    const [planChoice, setPlanChoice] = useState(true);
+export default function ChoosePlan() {
+
+    const [planChoice, setPlanChoice] = useState('yearly')
+    const [showCheckout, setShowCheckout] = useState(false)
+
+    const priceId =
+    planChoice === "yearly"
+    ? "price_1TvOu0LBH7C63U8xreJ05JHy"
+    : "price_1TvOubLBH7C63U8xuXhAHjbh";
+
+    const buttonText =
+    planChoice === "yearly"
+    ? "Start your 7-day free trial"
+    : "Start your monthly subscription";
 
     const handlePlanChoice = (event) => {
         setPlanChoice(event.target.value);
     };
 
-//     const handleAccordion = (index) => {
-//     // If clicked item is already open, close it; otherwise, open it
-//     setOpenIndex(openIndex === index ? null : index);
-//   };
 
   return (    
     <div className="wrapper__full">
@@ -127,8 +135,7 @@ export default function choosePlan() {
                         </div>
                     </div>
                     <div className="section__title">Choose the plan that fits you</div>
-                    <button 
-                    className={`plan__card ${planChoice === 'yearly' ? 'active' : ''}`}>
+                    <button className={`plan__card ${planChoice === 'yearly' ? 'active' : ''}`}>
                         <input 
                         type="radio"
                         name='subscription'
@@ -160,94 +167,51 @@ export default function choosePlan() {
                     <div className="plan__card--cta">
                         <span className='btn--wrapper'>
                             <button 
-                            onClick={() => startCheckoutSession(selectedProductId)}
+                            onClick={() => setShowCheckout(true)}
                             className='btn'>
-                                <span>Start your free 7-day trial</span>
+                                <span>{buttonText}</span>
                             </button>
                         </span>
                         <div className="plan__disclaimer">
                             Cancel your trial at any time before it ends, and you won't be charged.
                         </div>
                     </div>
+                    {showCheckout && (
+                    <Checkout priceId={priceId} />
+                    )}
                     <div className="faq__wrapper">
                         <div className="accordion__card">
-                            <div className="accordion__header">
-                                <div className="accordion__title">
-                                    How does the 7-day free trial work?
-                                </div>
-                                <button>
-                                    <IoIosArrowDropdown className={`accordion__icon ${openIndex ? 'rotated' : ''}`}/>
-                                </button>
-                            </div>
-                            <AccordionItem>
-                            <div className="collapse__show">
-                                <div className="accordion__body">
-                                    Begin your complimentary 7-day trial with a Summarist annual membership. 
-                                    You are under no obligation to continue your subscription, 
-                                    and you will only be billed when the trial period expires. 
-                                    With Premium access, you can learn at your own pace and as frequently as you desire, 
-                                    and you may terminate your subscription prior to the conclusion of the 7-day free trial.
-                                </div>
-                            </div>
-                            </AccordionItem>
+                            <AccordionItem
+                                question="How does the 7-day free trial work?"
+                                answer="Begin your complimentary 7-day trial with a Summarist annual membership. You are under no obligation to continue your subscription, 
+                                    and you will only be billed when the trial period expires. With Premium access, you can learn at your own pace and as frequently as you desire, 
+                                    and you may terminate your subscription prior to the conclusion of the 7-day free trial."
+                            />
                         </div>
                         <div className="accordion__card">
-                            <div className="accordion__header">
-                                <div className="accordion__title">
-                                    Can I switch subscriptions from monthly to yearly, or yearly to monthly?
-                                </div>
-                                <button>
-                                    <IoIosArrowDropdown className={`accordion__icon ${openIndex ? 'rotated' : ''}`}/>
-                                </button>
-                            </div>
-                            <AccordionItem>
-                            <div className="collapse__show">
-                                <div className="accordion__body">
-                                    While an annual plan is active, it is not feasible to switch to a monthly plan. 
-                                    However, once the current month ends, transitioning from a monthly plan to an annual plan is an option.
-                                </div>
-                            </div>
-                            </AccordionItem>
+                            <AccordionItem
+                                question="Can I switch subscriptions from monthly to yearly, or yearly to monthly?"
+                                answer="While an annual plan is active, it is not feasible to switch to a monthly plan. 
+                                    However, once the current month ends, transitioning from a monthly plan to an annual plan is an option."
+                            />
                         </div>
                         <div className="accordion__card">
-                            <div className="accordion__header">
-                                <div className="accordion__title">
-                                    What's included in the Premium plan?
-                                </div>
-                                <figure>
-                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
-                                </figure>
-                            </div>
-                            <AccordionItem>
-                            <div className="collapse__show">
-                                <div className="accordion__body">
-                                    Premium membership provides you with the ultimate Summarist 
+                            <AccordionItem
+                                question="What's included in the Premium plan?"
+                                answer="Premium membership provides you with the ultimate Summarist 
                                     experience, including unrestricted entry to many best-selling 
                                     books high-quality audio, the ability to download titles for offline reading, 
-                                    and the option to send your reads to your Kindle.
-                                </div>
-                            </div>
-                            </AccordionItem>
+                                    and the option to send your reads to your Kindle."
+                            />
                         </div>
                         <div className="accordion__card">
-                            <div className="accordion__header">
-                                <div className="accordion__title">
-                                    Can I cancel during my trial or subscription?
-                                </div>
-                                <figure>
-                                    <IoIosArrowDropdown className='accordion__icon accordion__icon--rotate'/>
-                                </figure>
-                            </div>
-                            <AccordionItem>
-                            <div className="collapse__show">
-                                <div className="accordion__body">
-                                    You will not be charged if you cancel your trial 
+                            <AccordionItem
+                                question="Can I cancel during my trial or subscription?"
+                                answer="You will not be charged if you cancel your trial 
                                     before its conclusion. While you will not have complete 
                                     access to the entire Summarist library, you can still expand 
-                                    your knowledge with one curated book per day.
-                                </div>
-                            </div>
-                            </AccordionItem>
+                                    your knowledge with one curated book per day."
+                            />
                         </div>
                     </div>
                 </div>
@@ -257,3 +221,4 @@ export default function choosePlan() {
     </div>
   )
 }
+

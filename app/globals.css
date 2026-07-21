@@ -1425,6 +1425,17 @@ a {
     transition: transform .3s;
 }
 
+.accordion__button {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 16px 0;
+  cursor: pointer;
+}
+
 .plan__header--wrapper {
     position: relative;
     text-align: center;

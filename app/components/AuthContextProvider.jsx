@@ -7,7 +7,8 @@ import {
   signInAnonymously,
   onAuthStateChanged 
 } from 'firebase/auth';
-import { auth } from '../firebase';
+import { auth, db } from '../firebase';
+import { doc, setDoc, serverTimestamp } from 'firebase/firestore';
 
 const AuthContext = createContext(null);
 
@@ -25,7 +26,25 @@ export const AuthContextProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const register = (e, p) => createUserWithEmailAndPassword(auth, e, p);
+
+  const register = async (email, password) => {
+    const userCredential = await createUserWithEmailAndPassword(
+      auth,
+      email,
+      password
+    );
+
+    await setDoc(doc(db, 'users', userCredential.user.uid), {
+      email: userCredential.user.email,
+      subscriptionStatus: 'inactive',
+      stripeCustomerId: null,
+      stripeSubscriptionId: null,
+      createdAt: serverTimestamp()
+    });
+
+    return userCredential;
+  };
+
   const login = (e, p) => signInWithEmailAndPassword(auth, e, p);
   const guestLogin = () => signInAnonymously(auth);
   const logout = () => signOut(auth);
